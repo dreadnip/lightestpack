@@ -1,0 +1,20 @@
+{% include '/common/header.twig' %}
+
+    <div class="main">
+
+        {% if name is defined %}
+            <h2>Hello {{ name }}!</h2>
+        {% endif %}
+
+        <p>Welcome to your new app</p>
+        <p>Features:</p>
+        <ul>
+            <li>Basic app structure</li>
+            <li>Twig templating</li>
+            <li>Whoops fancy errors</li>
+            <li>Respect validation</li>
+        </ul>
+
+    </div>
+
+{% include '/common/footer.twig' %}
