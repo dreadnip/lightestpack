@@ -163,6 +163,10 @@ $app->post('/save', function ($request, $response, $args) {
     return $res;
 });
 
+$app->get('/gear', function ($request, $response, $args) {
+    return json_encode(get_gear());
+});
+
 /* 
 
 My lists
@@ -192,6 +196,24 @@ $app->get('/create', function ($request, $response, $args) {
 
 })->add($protected);
 
+$app->post('/import', function ($request, $response, $args) {
+
+    $post = (object)$request->getParams();
+    $curl = curl_init();
+    $url = "https://lighterpack.com/csv/".$post->import;
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    $result = curl_exec($curl);
+    $responseCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+    if($responseCode == 200 && $result){
+        $new_list = import($result);
+        return $response->withStatus(302)->withHeader('Location', '/browse/'.$new_list);
+    }else{
+        return $response->withStatus(302)->withHeader('Location', '/lists');
+    }
+
+});
+
 /*
 
 Basic routes
@@ -205,9 +227,5 @@ $app->get('/about', function ($request, $response, $args) {
 
 $app->get('/', function ($request, $response, $args) {
 
-
-    if(isset($_COOKIE['pers']) && empty($_SESSION['logged_in'])) {
-        check_cookie();
-    }
     return $this->view->fetch('index.twig', $args);
 });

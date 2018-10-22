@@ -1,10 +1,3 @@
-# Basic slim bootstrap
+# LightestPack
 
-My version of the Slim 3 Skeleton, with these added features:
-
-* Twig
-* Whoops
-* Respect validation
-* Basic folder structure set-up
-* CSS Reset (maybe include Bulma.css by default?)
-* More to come?
+A lightweight, no-nonsense list keeping site with a focus on weight.

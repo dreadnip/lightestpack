@@ -78,6 +78,40 @@ function generate_new_list_id()
     return strtoupper(substr(md5(rand()), 0, 6));
 }
 
+function import($csv)
+{
+    $last_category = null;
+    $list_content = (object)array("categories" => []);
+    $data = str_getcsv($csv, "\n"); //parse the rows
+    unset($data[0]); //get rid of the headers, don't need them
+    foreach($data as &$row) {
+        $row = str_getcsv($row, ",");
+        if($last_category == $row[1]){
+            //just add it to the same category
+            $new_item = (object)array("name" => $row[0],"weight" => $row[4],"quantity" => $row[3]);
+            $category->items[] = $new_item;
+        }else{
+            //add the last category to the list array
+            if(isset($category) && $category != null){
+                $list_content->categories[] = $category;
+            }
+            //start a new category
+            $category = (object)array("category_name" => $row[1], "items" => []);
+            $new_item = (object)array("name" => $row[0],"weight" => $row[4],"quantity" => $row[3]);
+            $category->items[] = $new_item;
+        }
+        $last_category = $row[1];
+    }
+    $list_content->categories[] = $category;
+    //echo "<pre>";
+    //var_dump($list_content);
+
+    $user_id = $_SESSION['user_id'];
+    $new_list_id = generate_new_list_id();
+    $new_list = create_new_list($new_list_id, 'Your imported LighterPack list', json_encode($list_content), $user_id);
+    return $new_list;
+}
+
 /* ============================================
                 Email functions
 ============================================ */

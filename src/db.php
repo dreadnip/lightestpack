@@ -130,6 +130,7 @@ function create_new_list($list_id, $list_name, $list_content, $user_id)
     $add_list_record_stmt->execute();
 
     $pdo = null;
+    $_SESSION['user_lists'][] = $new_list_id;
     return $list_id;
 }
 
@@ -207,6 +208,21 @@ function get_user_by_cookie($cookie)
     $pdo = null;
     if (isset($result[0])) {
         return $result[0];
+    } else {
+        return false;
+    } 
+}
+
+/* Gear */
+
+function get_gear()
+{
+    $pdo = return_handler();
+    $sql = "SELECT * FROM gear";
+    $result = $pdo->query($sql)->fetchAll();
+    $pdo = null;
+    if (isset($result)) {
+        return $result;
     } else {
         return false;
     } 

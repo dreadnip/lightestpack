@@ -17,6 +17,13 @@
 
 		{% endif %}
 
+		<hr>
+
+		<h2>Import from LighterPack</h2>
+		<form action="/import" method="post" class="import">
+            <input type="text" name="import" placeholder="Enter the Lighterpack list code. E.g: 420y6s" />
+            <input type='submit' value='Import' />
+        </form>
 	</section>
 
 {% include '/common/footer.twig' %}

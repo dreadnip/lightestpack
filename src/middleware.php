@@ -13,3 +13,13 @@ $protected = function ($request, $response, $next) {
         return $response->withStatus(302)->withHeader('Location', '/login');
     }
 };
+
+//persistent login middleware
+function ($request, $response, $next) {
+    if(isset($_COOKIE['pers']) && empty($_SESSION['logged_in'])) {
+        check_cookie();
+    }
+    $response = $next($request, $response);
+
+    return $response;
+};

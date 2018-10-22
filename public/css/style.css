@@ -16,10 +16,19 @@ h1 {
 	margin-bottom: 10px;
 }
 
+h2 {
+	font-size: 1em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
 a {
 	color: blue;
 }
 
+hr {
+	margin-bottom: 10px;
+}
 .main {
 	display: flex;
 	flex-direction: column;
@@ -51,11 +60,12 @@ header a {
 .field {
 	margin-bottom: 10px;
 }
-/*
-input[type=text], input[type=password] {
+
+.control input[type=text], .control input[type=password] {
 	height: 20px;
+	width: 250px;
 }
-*/
+
 .button {
 	margin-bottom: 10px;
 }
@@ -67,7 +77,14 @@ input[type=text], input[type=password] {
 	margin-top: 5px;
 	color: red;
 }
-
+.import{
+	width: 100%;
+	margin-bottom: 10px;
+	display: flex;
+}
+.import input[type=text] {
+	flex: 1;
+}
 /* Home */
 
 .menu {
@@ -167,8 +184,10 @@ footer {
 .edit-field:hover, .edit-field:focus {
 	background-color: #eee;
 }
-
-.edit .category-header, .edit .child-list li {
+.edit .child-list-item {
+	position: relative;
+}
+.edit .category-header, .edit .child-list-item {
 	cursor: move;
 }
 /* list item widths */
@@ -178,6 +197,17 @@ footer {
 .edit .item-weight {
 	text-align: right;
 	max-width: 50px;
+}
+
+.auto {
+	position: absolute;
+	top: 20px;
+	z-index: 5;
+	border: solid 1px #aaa;
+	background-color: #eee;
+	margin-left: 38px;
+	max-width: 350px;
+	padding: 5px;
 }
 
 /* About */
