@@ -196,11 +196,13 @@ $app->get('/create', function ($request, $response, $args) {
 
 })->add($protected);
 
-$app->get('/delete[/{id}]', function ($request, $response, $args) {
+$app->get('/delete[/{key}]', function ($request, $response, $args) {
 
-    if(isset($args['id'])){
-        $list_id = $args['id'];
-        $list = delete_list($list_id);
+    if(isset($args['key'])){
+        $list_key = $args['key'];
+        if(in_array($list_key, $_SESSION['user_lists'])){
+            $list = delete_list($list_key);
+        }
     }
 
     return $response->withStatus(302)->withHeader('Location', '/lists');
