@@ -1,0 +1,25 @@
+{% include '/common/header.twig' %}
+
+	<section class="content">
+		<form action="/search" method="post" class="search">
+            <input type="text" name="search" placeholder="Search for a trail, country, user,..." value="{{ (search_query is defined) ? search_query : '' }}" />
+            <input type='submit' value='Search' />
+        </form>
+
+        <h1>Search results for {{ (search_query is defined) ? search_query : '' }}</h1>
+		{% if search_results is defined and search_results is not empty%}
+			<ul class="results">
+				{% for result in search_results %}
+					<li><a href="/browse/{{ result.ls_id }}">{{ result.ls_name }} by {{ result.us_email }}</a></li>
+			  	{% endfor %}
+			</ul>
+
+		{% else %}
+			
+			<p>Nothing found</p>
+
+		{% endif %}
+
+	</section>
+
+{% include '/common/footer.twig' %}

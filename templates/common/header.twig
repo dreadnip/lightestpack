@@ -2,11 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>App title</title>
+  <title>LightestPack</title>
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"> 
+
   <link rel="stylesheet" href="/css/style.css">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/icon.png">
 </head>
 <body>
+
+	<div class="main">
+
+		<header>
+        	<a href="/"><img class="logo" src="/img/yeti.png" /></a>
+          <div class="controls">
+          	{% if session.logged_in == true %}
+              <a href="/lists">[your lists]</a>
+          		<a href="/logout">[logout]</a>
+          	{% else %}
+          		<a href="/login">[login]</a>
+          	{% endif %}
+          </div>
+        </header>

@@ -1,0 +1,83 @@
+{% include '/common/header.twig' %}
+
+	<section class="content">
+
+		{% if list is not defined %}
+
+			<p>Please enter a list</p>
+
+		{% elseif list == false %}
+			
+			<p>List doesn't exist</p>
+
+		{% elseif list is defined %}
+			
+			{# Two options, either display normal list, or go into edit mode when user is logged in and this list belongs to him #}
+
+			{% if list.ls_key in session.user_lists %}
+				
+				{# List belongs to user #}
+				<div class="edit" data-list="{{ list.ls_id }}">
+					<h1><i class="indicator"></i><input type="text" class="edit-field list-name" value="{{ list.ls_name }}" placeholder="List title"></input><span class="base">{{ list.base_weight }}kg</span></h1>
+					<ul class="list">
+						{% for category in list.ls_content.categories %}
+							<li class="category-item">
+								<div class="category-header">
+									<input type="text" class="edit-field category-name" value="{{ category.category_name }}" placeholder="Category name"></input>
+									<span class="category-weight">{{ category.total_weight }}g</span>
+								</div>
+								<ul class="child-list">
+									{% for item in category.items %}
+										<li class="child-list-item">
+											<input type="text" class="edit-field item-quantity" value="{{ item.quantity }}"></input>
+											<span class="quantity-multiplier">x</span>
+											<input type="text" class="edit-field item-name" value="{{ item.name }}" placeholder="Item description"></input>
+											<input type="text" class="edit-field item-weight" value="{{ item.weight }}"></input>
+											<span class="weight-term">g</span>
+										</li>
+								  	{% endfor %}
+								  	<li><a href="#" class="add-item">Add item</a></li>
+							  	</ul>
+						  	</li>
+					  	{% endfor %}
+					  	<li><a href="#" class="add-category">Add category</a></li>
+					</ul>
+					<div class="tags">
+						{% for tag in list.tags %}
+							<a href="/search/{{ tag }}">#{{ tag }}</a>
+						{% endfor %}
+					</div>
+				</div>
+
+			{% else %}
+
+				{# List does not belong to user #}
+				<h1>{{ list.ls_name }}<span class="base">{{ list.base_weight }}kg</span></h1>
+				<ul class="list">
+					{% for category in list.ls_content.categories %}
+						<li class="category-item">
+							<div class="category-header">
+								<span class="category-name">{{ category.category_name }}</span>
+								<span class="category-weight">{{ category.total_weight }}g</span>
+							</div>
+							<ul class="child-list">
+							{% for item in category.items %}
+								<li class="child-list-item"><span class='item-quantity'>{{ item.quantity }}</span>x<span class='item-name'>{{ item.name }}</span><span class='item-weight'>{{ item.weight }}</span>g</li>
+						  	{% endfor %}
+						  	</ul>
+					  	</li>
+				  	{% endfor %}
+				</ul>
+				<div class="tags">
+					{% for tag in list.tags %}
+						<a href="/search/{{ tag }}">#{{ tag }}</a>
+					{% endfor %}
+				</div>
+
+			{% endif %}
+
+		{% endif %}
+
+	</section>
+
+{% include '/common/footer.twig' %}

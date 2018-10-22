@@ -1,20 +1,16 @@
 {% include '/common/header.twig' %}
 
-    <div class="main">
+    <section class="content">
+        <form action="/search" method="post" class="search">
+            <input type="text" name="search" placeholder="Search for a trail, country, user, piece of gear, ..." />
+            <input type='submit' value='Search' />
+        </form>
 
-        {% if name is defined %}
-            <h2>Hello {{ name }}!</h2>
-        {% endif %}
-
-        <p>Welcome to your new app</p>
-        <p>Features:</p>
-        <ul>
-            <li>Basic app structure</li>
-            <li>Twig templating</li>
-            <li>Whoops fancy errors</li>
-            <li>Respect validation</li>
+        <p>or</p>
+        <ul class="menu">
+            <li><a href="/browse/random">Browse a random list</a></li>
+            <li><a href="/about">Find out what this site is about</a></li>
         </ul>
-
-    </div>
+    </section>
 
 {% include '/common/footer.twig' %}

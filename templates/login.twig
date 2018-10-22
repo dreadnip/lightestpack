@@ -1,0 +1,63 @@
+{% include '/common/header.twig' %}
+
+
+<section class="content">
+
+	<h1>Login</h1>
+	
+	<div class='errors'>
+		
+	</div>
+	<form action="/login" method="post">
+
+		<div class="field">
+			<label class="label">email</label>
+			
+			{% if errors.user_email is defined %}
+				<p class="control">
+					<input class="input error" type="text" name="user_email">
+				</p>
+				{% for error in errors.user_email %}
+					<p class="help">{{ error }}</p>
+				{% endfor %}
+			{% elseif form_input.user_email is defined %}
+				<p class="control">
+					<input class="input" type="text" name="user_email" value="{{ form_input.user_email }}">
+				</p>
+			{% else %}
+				<p class="control">
+					<input class="input" type="text" name="user_email" placeholder="you@thetrek.co">
+				</p>
+			{% endif %}
+			
+		</div>
+		
+		<div class="field">
+			<label class="label">password</label>
+
+			{% if errors.user_password is defined %}
+				<p class="control">
+					<input class="input error" type="password" name="user_password" placeholder="">
+				</p>
+				{% for error in errors.user_password %}
+					<p class="help">{{ error }}</p>
+				{% endfor %}
+			{% else %}
+				<p class="control">
+					<input class="input" type="password" name="user_password" placeholder="">
+				</p>
+			{% endif %}
+
+		</div>
+
+		<input type="submit" class="button" value="log in" />
+
+	</form>
+	<p class="form-controls">
+		[<a href="register">register</a>]
+		[<a href="#">lost pasword</a>]
+	</p>
+
+</section>
+
+{% include '/common/footer.twig' %}

@@ -23,6 +23,12 @@ require __DIR__ . '/../src/dependencies.php';
 // Register middleware
 require __DIR__ . '/../src/middleware.php';
 
+// Load our custom database controller
+require __DIR__ . '/../src/db.php';
+
+// Load our custom controller
+require __DIR__ . '/../src/controller.php';
+
 // Register routes
 require __DIR__ . '/../src/routes.php';
 
