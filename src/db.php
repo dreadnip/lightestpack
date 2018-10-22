@@ -134,6 +134,17 @@ function create_new_list($list_id, $list_name, $list_content, $user_id)
     return $list_id;
 }
 
+function delete_list($list_id)
+{
+    $pdo = return_handler();
+    $stmt = $pdo->prepare("DELETE FROM lists WHERE ls_key = :list_id");
+    $stmt->bindParam(':list_id', $list_id);
+    $stmt->execute();
+
+    $stmt = $pdo->prepare("DELETE FROM user_lists WHERE ls_id = :list_id");
+    $stmt->bindParam(':list_id', $list_id);
+    $stmt->execute();
+}
 
 /* Users */
 

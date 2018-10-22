@@ -155,6 +155,20 @@ footer {
 	padding: 5px;
 }
 
+/* Profile (lists) */
+.lists li {
+	margin-bottom: 10px;
+}
+.list-item {
+	display: flex;
+}
+.browse-link {
+	flex: 1;
+}
+.delete-link {
+	color: red;
+}
+
 /* Edit list specifics */
 .edit {
 

@@ -4,9 +4,9 @@
 
         <h1>Your lists</h1>
 		{% if lists is defined and lists is not empty%}
-			<ul class="results">
+			<ul class="lists">
 				{% for list in lists %}
-					<li><a href="/browse/{{ list.ls_id }}">{{ list.ls_name }}</a></li>
+					<li class="list-item"><a class="browse-link" href="/browse/{{ list.ls_id }}">{{ list.ls_name }}</a><a class="delete-link" href="/delete/{{ list.ls_key }}">delete</a></li>
 			  	{% endfor %}
 			  	<li><a href="#" class="create-list">Start new list</a></li>
 			</ul>

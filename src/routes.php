@@ -196,6 +196,16 @@ $app->get('/create', function ($request, $response, $args) {
 
 })->add($protected);
 
+$app->get('/delete[/{id}]', function ($request, $response, $args) {
+
+    if(isset($args['id'])){
+        $list_id = $args['id'];
+        $list = delete_list($list_id);
+    }
+
+    return $response->withStatus(302)->withHeader('Location', '/lists');
+})->add($protected);
+
 $app->post('/import', function ($request, $response, $args) {
 
     $post = (object)$request->getParams();
